@@ -1,1 +1,1 @@
-ls: a: No such file or directory
+script: sdsd: No such file or directory
