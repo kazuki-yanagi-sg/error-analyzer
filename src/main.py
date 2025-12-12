@@ -62,8 +62,18 @@ def main():
 
     # 3. RAG Search
     query = summary_data.get("search_query", analysis_data.get("error_message", ""))
+    print(f"🔍 Pinecone検索中... クエリ: {query}", file=sys.stderr)
+    
     rag_docs = vector_store.similarity_search(query)
-    rag_context = "\n\n".join([d.page_content for d in rag_docs])
+    print(f"📄 検索結果: {len(rag_docs)} 件の関連ドキュメントが見つかりました。", file=sys.stderr)
+    
+    rag_context = ""
+    if rag_docs:
+        rag_context = "\n\n".join([d.page_content for d in rag_docs])
+        # For debugging/transparency, show a snippet of what was found
+        print(f"--- 取得したコンテキスト (先頭200文字) ---\n{rag_context[:200]}...\n------------------------------------------", file=sys.stderr)
+    else:
+        print("⚠️ 関連ドキュメントが見つかりませんでした。", file=sys.stderr)
 
     # 4. Audit & Final Output
     final_output = auditor.audit(summary_json, rag_context)
