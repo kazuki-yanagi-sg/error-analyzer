@@ -53,7 +53,7 @@
 1. 以下のコマンドを実行して、設定を `.zshrc` に追加します。
 
    ```bash
-   echo "source /Users/kazukiyanagi/Desktop/Projects/エラー要約システム/src/auto_wrapper.zsh" >> ~/.zshrc
+   echo "source src/auto_wrapper.zsh" >> ~/.zshrc
    ```
 
 2. 設定を反映させます。
