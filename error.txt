@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "app.py", line 10, in <module>
+    with open("config.json", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'config.json'
