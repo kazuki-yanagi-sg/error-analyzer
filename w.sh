@@ -14,11 +14,12 @@ PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Temporary file to store output
 LOG_FILE=$(mktemp)
 
-# Run the command, capturing both stdout and stderr to the log file
-# while also displaying it to the user (using tee).
-# We merge stderr to stdout for simplicity and to ensure order is preserved in the log.
-"$@" 2>&1 | tee "$LOG_FILE"
-EXIT_CODE=${PIPESTATUS[0]}
+# Run the command using 'script' to preserve TTY behavior (colors, interactive apps).
+# -q: Quiet mode (don't show start/done messages)
+# -F: Flush output immediately (macOS specific, useful for real-time logging)
+# The command output is saved to LOG_FILE and also shown on screen.
+script -q -F "$LOG_FILE" "$@"
+EXIT_CODE=$?
 
 # Wait a moment for I/O to flush (just in case)
 sleep 0.1

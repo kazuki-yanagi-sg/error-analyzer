@@ -17,6 +17,7 @@ _ES_EXCLUDED_COMMANDS=(
     "docker" "docker-compose" # Often interactive or produce complex output streams
     "git" # Git has its own error handling, usually doesn't need full RAG analysis for simple typos
     "w" # Don't wrap the wrapper
+    "claude" # Interactive CLI
     "exit" "logout" "clear" "history"
 )
 
